@@ -17,7 +17,7 @@ target("archp_cpu", function()
 
 	set_toolchains("@verilator")
 
-	add_files("bundled.min.sv")
+	add_files("bundled.sv")
 	add_files("src/top.cpp")
 
 	add_values("verilator.flags", "-O2")

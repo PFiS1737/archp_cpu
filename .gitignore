@@ -7,5 +7,5 @@
 /dependencies/
 /sourcemaps/
 /waves/
-*.min.sv
+bundled.sv
 *.f
