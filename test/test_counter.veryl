@@ -1,0 +1,20 @@
+#[test(test_counter)]
+module test_counter {
+    inst clk: $tb::clock_gen;
+    inst rst: $tb::reset_gen ( clk );
+
+    var cnt: logic<10>;
+
+    inst dut: Counter #( WIDTH: 16 ) ( clk, rst, count: cnt );
+
+    initial {
+        rst.assert();
+        clk.next(10);
+        $assert(cnt == 8'd10);
+        clk.next(10);
+        $assert(cnt == 8'd20);
+        clk.next(10);
+        $assert(cnt == 8'd30);
+        $finish();
+    }
+}

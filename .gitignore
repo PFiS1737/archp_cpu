@@ -1,0 +1,11 @@
+# Xmake
+/.xmake/
+/build/
+
+# Veryl
+/.build/
+/dependencies/
+/sourcemaps/
+/waves/
+*.min.sv
+*.f
