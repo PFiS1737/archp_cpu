@@ -24,6 +24,11 @@ int main(int argc, char **argv) {
 #endif
 
   std::string file = contextp->commandArgsPlusMatch("FILE=");
+  if (file.empty()) {
+    std::cerr << "Error: No input file specified. Use +FILE=<path_to_file> to "
+                 "specify the input file.\n";
+    return 1;
+  }
   try {
     // INFO: Call substr(6) to remove "FILE=" prefix.
     program.open(file.substr(6));
