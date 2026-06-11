@@ -12,7 +12,7 @@ set_xmakever("3.0.7")
 set_project("archp_cpu")
 set_version("0.0.0")
 
-target("archp_cpu", function()
+target("Vtop", function()
 	add_rules("verilator.binary")
 	set_toolchains("@verilator")
 

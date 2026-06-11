@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "archp_cpu.h"
-#include "archp_cpu__Dpi.h"
+#include "Vtop.h"
+#include "Vtop__Dpi.h"
 
 #include "./cpp/includes/ProgramLoader.hpp"
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  const std::unique_ptr<archp_cpu> top{new archp_cpu{contextp.get()}};
+  const std::unique_ptr<Vtop> top{new Vtop{contextp.get()}};
 
   top->rst = 1;
 
