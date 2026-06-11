@@ -3,7 +3,7 @@
 #include "archp_cpu.h"
 #include "archp_cpu__Dpi.h"
 
-#include "./includes/ProgramLoader.hpp"
+#include "./cpp/includes/ProgramLoader.hpp"
 
 ProgramLoader program;
 
