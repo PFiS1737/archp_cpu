@@ -6,6 +6,6 @@
 /.build/
 /dependencies/
 /sourcemaps/
-/waves/
+*.fst
 bundled.sv
 *.f

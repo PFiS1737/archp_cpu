@@ -17,8 +17,11 @@ int main(int argc, char **argv) {
   contextp->debug(0);
   contextp->threads(1);
   contextp->randReset(2);
-  // contextp->traceEverOn(true);
   contextp->commandArgs(argc, argv);
+
+#ifdef VM_TRACE
+  contextp->traceEverOn(true);
+#endif
 
   std::string file = contextp->commandArgsPlusMatch("FILE=");
   try {

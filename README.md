@@ -13,7 +13,7 @@
 
 ```bash
 # Config
-just config debug
+just config
 
 # Build
 just build
