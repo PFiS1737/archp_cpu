@@ -34,5 +34,7 @@ target("Vtop", function()
 		add_values("verilator.flags", "-DTRACE")
 	end
 
+	add_values("verilator.flags", "-Wno-LATCH")
+
 	add_values("verilator.flags", { "--x-assign", "fast" }, { "--x-initial", "fast" }, "--noassert")
 end)
