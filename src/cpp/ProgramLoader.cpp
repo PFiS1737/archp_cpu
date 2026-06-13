@@ -14,7 +14,7 @@ void ProgramLoader::open(const std::string &file_name) {
   size_t size = ifs.tellg();
   ifs.seekg(0, std::ios::beg);
 
-  data.resize(size);
+  data.resize(size, 0);
 
   ifs.read(reinterpret_cast<char *>(data.data()), size);
 }

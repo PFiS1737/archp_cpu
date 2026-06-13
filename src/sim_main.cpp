@@ -2,9 +2,11 @@
 
 #include "Vtop.h"
 
+#include "./cpp/includes/Memory.hpp"
 #include "./cpp/includes/ProgramLoader.hpp"
 
 extern ProgramLoader program;
+extern Memory mem;
 
 int main(int argc, char **argv) {
   const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
@@ -31,6 +33,8 @@ int main(int argc, char **argv) {
     std::cerr << e->what() << "\n";
     return 1;
   }
+
+  mem.init(1024 * 1024 * 1024); // 1 GiB
 
   const std::unique_ptr<Vtop> top{new Vtop{contextp.get()}};
 
