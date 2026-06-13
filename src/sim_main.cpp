@@ -49,6 +49,18 @@ int main(int argc, char **argv) {
 
     top->clk = !top->clk;
 
+    if (top->clk) {
+      if (top->top_input_enable) {
+        uint32_t n;
+        scanf("%d", &n);
+        top->top_input_value = n;
+      }
+
+      if (top->top_output_enable) {
+        printf("%d\n", top->top_output_value);
+      }
+    }
+
     top->eval();
   }
 
