@@ -1,15 +1,10 @@
 #include <iostream>
 
 #include "Vtop.h"
-#include "Vtop__Dpi.h"
 
 #include "./cpp/includes/ProgramLoader.hpp"
 
-ProgramLoader program;
-
-unsigned int get_instruction(unsigned int pc) {
-  return program.get_instruction(pc);
-}
+extern ProgramLoader program;
 
 int main(int argc, char **argv) {
   const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
