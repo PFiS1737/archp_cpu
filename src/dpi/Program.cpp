@@ -2,7 +2,9 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "./includes/Program.hpp"
+#include "Vtop__Dpi.h"
+
+#include "./Program.hpp"
 
 void Program::open(const std::string &file_name) {
   std::ifstream ifs(file_name, std::ios::binary);
@@ -31,4 +33,10 @@ uint32_t Program::get_instruction(uint32_t pc) {
   }
 
   return instr;
+}
+
+Program program;
+
+unsigned int get_instruction(unsigned int pc) {
+  return program.get_instruction(pc);
 }

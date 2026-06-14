@@ -2,7 +2,9 @@
 #include <cstring>
 #include <stdexcept>
 
-#include "./includes/Memory.hpp"
+#include "Vtop__Dpi.h"
+
+#include "./Memory.hpp"
 
 void Memory::init(size_t size_in_bytes) {
   mem.resize(size_in_bytes, 0);
@@ -63,4 +65,16 @@ void Memory::store(uint32_t addr, uint8_t width, uint32_t data) {
   default:
     throw std::runtime_error("invalid width");
   }
+}
+
+Memory mem;
+
+void mem_reset() { mem.reset(); }
+
+unsigned int mem_load(unsigned int addr, const svBitVecVal *width) {
+  return mem.load(addr, *width);
+}
+
+void mem_store(unsigned int addr, const svBitVecVal *width, int data) {
+  mem.store(addr, *width, static_cast<uint32_t>(data));
 }

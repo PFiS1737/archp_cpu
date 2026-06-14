@@ -2,8 +2,8 @@
 
 #include "Vtop.h"
 
-#include "./cpp/includes/Memory.hpp"
-#include "./cpp/includes/Program.hpp"
+#include "./dpi/Memory.hpp"
+#include "./dpi/Program.hpp"
 
 extern Program program;
 extern Memory mem;

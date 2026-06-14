@@ -20,9 +20,10 @@ target("Vtop", function()
 	set_optimize("faster")
 	set_strip("all")
 
-	add_files("bundled.sv", "src/**.sv")
+	add_files("bundled.sv")
 
-	add_files("src/**.cpp")
+	-- DPI files
+	add_files("src/**.sv", "src/**.cpp")
 	add_headerfiles("src/**.hpp")
 
 	add_values("verilator.flags", "-O2")
