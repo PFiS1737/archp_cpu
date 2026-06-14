@@ -5,8 +5,8 @@
 #include "./dpi/Memory.hpp"
 #include "./dpi/Program.hpp"
 
-extern Program program;
 extern Memory mem;
+extern Program program;
 
 int main(int argc, char **argv) {
   const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // TODO: Make these sizes configurable via command line arguments.
   mem.init(1024 * 1024 * 1024); // 1 GiB
 
   const std::unique_ptr<Vtop> top{new Vtop{contextp.get()}};
