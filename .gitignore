@@ -6,6 +6,6 @@
 /.build/
 /dependencies/
 /sourcemaps/
-*.fst
+*.fst*
 bundled.sv
 *.f
