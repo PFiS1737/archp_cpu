@@ -3,9 +3,9 @@
 #include "Vtop.h"
 
 #include "./cpp/includes/Memory.hpp"
-#include "./cpp/includes/ProgramLoader.hpp"
+#include "./cpp/includes/Program.hpp"
 
-extern ProgramLoader program;
+extern Program program;
 extern Memory mem;
 
 int main(int argc, char **argv) {

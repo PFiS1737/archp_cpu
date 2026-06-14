@@ -1,9 +1,9 @@
 #include "Vtop__Dpi.h"
 
 #include "./cpp/includes/Memory.hpp"
-#include "./cpp/includes/ProgramLoader.hpp"
+#include "./cpp/includes/Program.hpp"
 
-ProgramLoader program;
+Program program;
 
 unsigned int get_instruction(unsigned int pc) {
   return program.get_instruction(pc);

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class ProgramLoader {
+class Program {
 public:
   void open(const std::string &file_name);
   uint32_t get_instruction(uint32_t pc);

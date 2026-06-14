@@ -2,9 +2,9 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "./includes/ProgramLoader.hpp"
+#include "./includes/Program.hpp"
 
-void ProgramLoader::open(const std::string &file_name) {
+void Program::open(const std::string &file_name) {
   std::ifstream ifs(file_name, std::ios::binary);
   if (!ifs) {
     throw new std::runtime_error("Failed to open file: " + file_name);
@@ -19,7 +19,7 @@ void ProgramLoader::open(const std::string &file_name) {
   ifs.read(reinterpret_cast<char *>(data.data()), size);
 }
 
-uint32_t ProgramLoader::get_instruction(uint32_t pc) {
+uint32_t Program::get_instruction(uint32_t pc) {
   uint32_t instr = 0;
 
   for (int i = 0; i < 4; ++i) {
