@@ -68,6 +68,8 @@ int main(int argc, char **argv) {
     top->clk = !top->clk;
 
     if (top->clk) {
+      stoped |= !pd.handle_event();
+
       if (top->top_input_enable) {
         uint32_t n;
         scanf("%d", &n);
@@ -79,12 +81,12 @@ int main(int argc, char **argv) {
       }
     }
 
-    top->eval();
-
-    if (stoped || pd.exit()) {
+    if (stoped) {
       std::cerr << "Simulation interrupted by user.\n";
       break;
     }
+
+    top->eval();
   }
 
   top->final();
