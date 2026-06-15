@@ -11,6 +11,9 @@ set_xmakever("3.0.7")
 
 set_project("archp_cpu")
 set_version("0.0.0")
+set_languages("c++20")
+
+add_requires("sdl3", { system = true })
 
 target("Vtop", function()
 	add_rules("verilator.binary")
@@ -27,6 +30,8 @@ target("Vtop", function()
 	add_headerfiles("src/**.hpp")
 
 	add_values("verilator.flags", "-O2")
+
+	add_packages("sdl3")
 
 	if is_mode("trace") then
 		-- See https://github.com/xmake-io/xmake/pull/7601

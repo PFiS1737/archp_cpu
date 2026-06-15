@@ -1,19 +1,31 @@
+#include <csignal>
+#include <ctime>
 #include <iostream>
 
 #include "Vtop.h"
 
 #include "./dpi/Memory.hpp"
+#include "./dpi/PixelDisplay.hpp"
 #include "./dpi/Program.hpp"
 
 extern Memory mem;
+extern PixelDisplay pd;
 extern Program program;
 
+bool stoped = false;
+void handle_sigint(int sig) {
+  stoped = true;
+}
+
 int main(int argc, char **argv) {
+  signal(SIGINT, handle_sigint);
+
   const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
 
   contextp->debug(0);
   contextp->threads(1);
   contextp->randReset(2);
+  contextp->randSeed(time(0));
   contextp->commandArgs(argc, argv);
 
 #ifdef VM_TRACE
@@ -36,6 +48,11 @@ int main(int argc, char **argv) {
 
   // TODO: Make these sizes configurable via command line arguments.
   mem.init(1024 * 1024 * 1024); // 1 GiB
+
+  if (!pd.init(128, 96, 6)) {
+    pd.destroy();
+    return 1;
+  }
 
   const std::unique_ptr<Vtop> top{new Vtop{contextp.get()}};
 
@@ -63,9 +80,16 @@ int main(int argc, char **argv) {
     }
 
     top->eval();
+
+    if (stoped || pd.exit()) {
+      std::cerr << "Simulation interrupted by user.\n";
+      break;
+    }
   }
 
   top->final();
+
+  pd.destroy();
 
   return 0;
 }
