@@ -29,7 +29,7 @@ target("Vtop", function()
 	add_files("src/**.sv", "src/**.cpp")
 	add_headerfiles("src/**.hpp")
 
-	add_values("verilator.flags", "-O2")
+	add_values("verilator.flags", "-O2", "-Wall", "-Wno-DECLFILENAME")
 
 	add_packages("sdl3")
 
