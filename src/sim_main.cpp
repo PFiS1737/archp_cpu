@@ -69,16 +69,6 @@ int main(int argc, char **argv) {
 
     if (top->clk) {
       stoped |= !pd.handle_event();
-
-      if (top->top_input_enable) {
-        uint32_t n;
-        scanf("%d", &n);
-        top->top_input_value = n;
-      }
-
-      if (top->top_output_enable) {
-        printf("%d\n", top->top_output_value);
-      }
     }
 
     if (stoped) {
