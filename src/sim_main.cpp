@@ -1,12 +1,10 @@
 #include <csignal>
-#include <ctime>
 #include <iostream>
-
-#include "Vtop.h"
 
 #include "./dpi/Memory.hpp"
 #include "./dpi/PixelDisplay.hpp"
 #include "./dpi/Program.hpp"
+#include "./top.hpp"
 
 extern Memory mem;
 extern PixelDisplay pd;
@@ -20,19 +18,9 @@ void handle_sigint(int sig) {
 int main(int argc, char **argv) {
   signal(SIGINT, handle_sigint);
 
-  const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
+  Top top(argc, argv);
 
-  contextp->debug(0);
-  contextp->threads(1);
-  contextp->randReset(2);
-  contextp->randSeed(time(0));
-  contextp->commandArgs(argc, argv);
-
-#ifdef VM_TRACE
-  contextp->traceEverOn(true);
-#endif
-
-  std::string file = contextp->commandArgsPlusMatch("FILE=");
+  std::string file = top._commandArgsPlusMatch("FILE=");
   if (file.empty()) {
     std::cerr << "Error: No input file specified. Use +FILE=<path_to_file> to "
                  "specify the input file.\n";
@@ -54,20 +42,16 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  const std::unique_ptr<Vtop> top{new Vtop{contextp.get()}};
+  while (!top.gotFinish()) {
+    top.increase_time(1);
 
-  top->rst = 1;
-
-  while (!contextp->gotFinish()) {
-    contextp->timeInc(1);
-
-    if (contextp->time() > 2) {
-      top->rst = 0;
+    if (top.time() > 2) {
+      top.set_rst(0);
     }
 
-    top->clk = !top->clk;
+    top.flip_clk();
 
-    if (top->clk) {
+    if (top.posedge_clk()) {
       stoped |= !pd.handle_event();
     }
 
@@ -76,10 +60,8 @@ int main(int argc, char **argv) {
       break;
     }
 
-    top->eval();
+    top.eval();
   }
-
-  top->final();
 
   pd.destroy();
 
